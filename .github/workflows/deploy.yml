@@ -33,27 +33,27 @@ jobs:
       - name: Run maven tests & package
         run: mvn -B package --file pom.xml
 
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.7'
-      - name: Install Poetry
-        run: pip install poetry==1.1.4 poetry-dynamic-versioning==0.12.1
-      - name: Install libkrb5-dev
-        run: sudo apt-get install libkrb5-dev  # This is needed for installing pykerberos
-      - name: Install python dependencies
-        run: poetry install
-        working-directory: ./python
-      - name: Run python tests
-        run: poetry run pytest
-        working-directory: ./python
-
-      - name: Build python package
-        run: poetry build
-        working-directory: ./python
-      - name: Publish to PyPI
-        run: poetry publish -u '__token__' -p '${{ secrets.PYPI_TOKEN }}'
-        working-directory: ./python
+#      - name: Setup Python
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: '3.7'
+#      - name: Install Poetry
+#        run: pip install poetry==1.1.4 poetry-dynamic-versioning==0.12.1
+#      - name: Install libkrb5-dev
+#        run: sudo apt-get install libkrb5-dev  # This is needed for installing pykerberos
+#      - name: Install python dependencies
+#        run: poetry install
+#        working-directory: ./python
+#      - name: Run python tests
+#        run: poetry run pytest
+#        working-directory: ./python
+#
+#      - name: Build python package
+#        run: poetry build
+#        working-directory: ./python
+#      - name: Publish to PyPI
+#        run: poetry publish -u '__token__' -p '${{ secrets.PYPI_TOKEN }}'
+#        working-directory: ./python
 
       - name: Set up Apache Maven Central
         uses: actions/setup-java@v2

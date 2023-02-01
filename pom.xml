@@ -100,6 +100,12 @@
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
                 </exclusion>
+                <exclusion>
+                    <!-- TODO should we relocate this with maven shade plugin? -->
+                    <!-- Druid library needs a newer version than what spark 3.0.1 brings -->
+                    <groupId>org.roaringbitmap</groupId>
+                    <artifactId>RoaringBitmap</artifactId>
+                </exclusion>
             </exclusions>
             <scope>provided</scope>
         </dependency>

@@ -36,12 +36,12 @@ Overview diagram:
 ## Software requirements
 
 rovio-ingest requires
-* Apache Spark 3.1.1* 
+* Apache Spark 3* 
 * JDK8 (8u92+ or later).
 * Linux or MacOS.
 * Git repo must be cloned under a path that doesn't have spaces.
 
-(*) Spark 2 is not supported, but feel free to create a Github issue if you would need that.
+*) Spark 2 is not supported, but feel free to create a Github issue if you would need that.
 
 ## Motivation
 
@@ -349,7 +349,7 @@ These are the options for `DruidSource`, to be passed with `write.options()`.
 - `overwrite` as Spark write mode
 - `S3` as Druid Deep Storage
     - Also `local` Deep Storage, but it's only useful for testing
-    - `MySQL` or `PostgreSQL` as Druid Metadata Storage
+- `MySQL` or `PostgreSQL` as Druid Metadata Storage
 
 Contributions are welcome to support other write modes or combinations of Deep Storage & Metadata
 Storage.

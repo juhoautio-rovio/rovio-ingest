@@ -205,15 +205,14 @@ public class SegmentSpec implements Serializable {
             String fieldName = field.getName();
             if (field.getFieldType() == FieldType.STRING) {
                 builder.add(StringDimensionSchema.create(fieldName));
-            }
-            else if (!getTimeColumn().equals(fieldName) && !aggregatorFields.contains(fieldName)) {
+            } else if (!getTimeColumn().equals(fieldName) && !aggregatorFields.contains(fieldName)) {
                 if (field.getFieldType() == FieldType.LONG) {
                     builder.add(new LongDimensionSchema(fieldName));
-                }
-                else if (field.getFieldType() == FieldType.DOUBLE) {
+                } else if (field.getFieldType() == FieldType.DOUBLE) {
                     builder.add(new DoubleDimensionSchema(fieldName));
-                }
-                else if (field.getFieldType() == FieldType.TIMESTAMP) {
+                } else if (field.getFieldType() == FieldType.TIMESTAMP) {
+                    // TODO is this branch ever possible? Tthere's a precondition against FieldType.TIMESTAMP and
+                    //  DruidDatasetExtensions converts TimestampType & DateType to StringType.
                     builder.add(new LongDimensionSchema(fieldName));
                 }
             }

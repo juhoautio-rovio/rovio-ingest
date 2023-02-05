@@ -66,6 +66,8 @@ The Dataset extension performs the following validations:
 The Dataset extension performs the following transformations:
 * Drops all columns of complex datatypes such as `StructType`, `MapType` or `ArrayType` as they
 are not supported by `DruidSource`. This is only done if `excludeColumnsWithUnknownTypes` is set to true, otherwise validation has already failed.
+* Converts `Date`/`Timestamp` type columns to `String`, except for the `time_column`
+    - See [Druid Docs / Data types](https://druid.apache.org/docs/latest/querying/sql.html#standard-types)
 * Adds a new column `__PARTITION_TIME__` whose value is based on `time_column` column and the given [segment granularity](#segment-granularity)
 (applies
 [NormalizeTimeColumnUDF](src/main/java/com/rovio/ingest/util/NormalizeTimeColumnUDF.java))
@@ -81,8 +83,7 @@ added. `__PARTITION_TIME__` & `__PARTITION_NUM__` columns are always excluded fr
 The following type conversions are done on ingestion:
 - `Float` is converted to `Double`
     - See [Druid Docs / Double Column storage](https://druid.apache.org/docs/latest/configuration/index.html#double-column-storage))
-- `Date`/`Timestamp` is converted to `Long`, except for the `time_column`
-    - See [Druid Docs / Data types](https://druid.apache.org/docs/latest/querying/sql.html#standard-types)
+- `Boolean` is converted to `String`
 
 ## Segment granularity
 
@@ -143,7 +144,7 @@ Set the following spark conf:
 
 ```python
 .conf("spark.jars.packages",
-      "com.rovio.ingest:rovio-ingest:1.0.2_spark_3.0.1") \
+      "com.rovio.ingest:rovio-ingest:1.0.3_spark_3.0.1") \
 ```
 
 #### PySpark job example
@@ -205,14 +206,14 @@ A `Dataset[Row]` extension is provided to repartition the dataset for the `Druid
 For an interactive spark session you can set the following spark conf:
 
 ```scala
-("spark.jars.packages", "com.rovio.ingest:rovio-ingest:1.0.2_spark_3.0.1")
+("spark.jars.packages", "com.rovio.ingest:rovio-ingest:1.0.3_spark_3.0.1")
 ```
 
 To use a snapshot version:
 
 ```scala
 ("spark.jars.repositories", "https://s01.oss.sonatype.org/content/repositories/snapshots"),
-("spark.jars.packages", "com.rovio.ingest:rovio-ingest:1.0.2_spark_3.0.1-SNAPSHOT")
+("spark.jars.packages", "com.rovio.ingest:rovio-ingest:1.0.3_spark_3.0.1-SNAPSHOT")
 ```
 
 ```scala
@@ -248,7 +249,7 @@ Maven (for a full example, see [examples/rovio-ingest-maven-example](examples/ro
         <dependency>
             <groupId>com.rovio.ingest</groupId>
             <artifactId>rovio-ingest</artifactId>
-            <version>1.0.2_spark_3.0.1</version>
+            <version>1.0.3_spark_3.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -301,7 +302,7 @@ These are the options for `DruidSource`, to be passed with `write.options()`.
 | Property | Description |
 | --- |--- |
 | `druid.datasource` | Name of the target datasource in Druid |
-| `druid.time_column` | Name of the column in the Spark DataFrame to be translated as Druid `__time` interval. Must be of `TimestampType`. |
+| `druid.time_column` | Name of the column in the Spark DataFrame to be translated as Druid `__time` interval. Must be of `DateType` or `TimestampType`. |
 | `druid.metastore.db.uri` | Druid Metadata Storage database URI |
 | `druid.metastore.db.username` | Druid Metadata Storage database username |
 | `druid.metastore.db.password` | Druid Metadata Storage database password |

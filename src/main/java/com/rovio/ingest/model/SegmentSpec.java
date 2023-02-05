@@ -121,7 +121,7 @@ public class SegmentSpec implements Serializable {
                 "Schema has no dimensions");
 
         Preconditions.checkArgument(!rollup || fields.stream().anyMatch(f -> f.getFieldType() == FieldType.LONG || f.getFieldType() == FieldType.DOUBLE),
-                "Schema has rollup enable but has no metrics");
+                "Schema has rollup enabled but has no metrics");
 
         if (partitionTime != null) {
             Preconditions.checkArgument(partitionTime.getFieldType() == FieldType.TIMESTAMP,

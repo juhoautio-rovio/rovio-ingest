@@ -145,7 +145,7 @@ public class SegmentSpecTest {
         assertEquals(2, dimensions.size());
         List<String> expected = Arrays.asList("country", "city");
         assertTrue(dimensions.stream().allMatch(d -> expected.contains(d.getName())));
-        assertTrue(dimensions.stream().allMatch(d ->  ValueType.STRING == d.getValueType()));
+        assertTrue(dimensions.stream().allMatch(d -> ValueType.STRING == d.getValueType()));
 
         assertTrue(spec.getDataSchema().getGranularitySpec().isRollup());
 

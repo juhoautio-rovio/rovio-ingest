@@ -196,8 +196,8 @@ class TaskDataWriter implements DataWriter<InternalRow> {
                 if (tsVal != null && field.getSqlType() == DataTypes.DateType) {
                     // date is stored as days since epoch
                     tsVal = LocalDate.ofEpochDay(tsVal).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
-                }
-                else if (tsVal != null) {
+                } else if (tsVal != null) {
+                    // Adjust to millis as spark returns long value with microseconds.
                     tsVal = tsVal / 1000;
                 }
                 // the configured time columnName is mapped to __time

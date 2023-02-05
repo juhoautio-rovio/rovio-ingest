@@ -302,7 +302,6 @@ These are the options for `DruidSource`, to be passed with `write.options()`.
 | --- |--- |
 | `druid.datasource` | Name of the target datasource in Druid |
 | `druid.time_column` | Name of the column in the Spark DataFrame to be translated as Druid `__time` interval. Must be of `TimestampType`. |
-| `druid.metastore.db.type` | Druid Metadata Storage database type (either "mysql" or "postgres") |
 | `druid.metastore.db.uri` | Druid Metadata Storage database URI |
 | `druid.metastore.db.username` | Druid Metadata Storage database username |
 | `druid.metastore.db.password` | Druid Metadata Storage database password |
@@ -326,6 +325,7 @@ These are the options for `DruidSource`, to be passed with `write.options()`.
 
 | Property | Description | Default |
 | --- | --- | --- |
+| `druid.metastore.db.type` | Druid Metadata Storage database type. Possible values: `mysql`, `postgres`. | `mysql` |
 | `druid.metastore.db.table.base` | Druid Metadata Storage database table prefix | `druid` |
 | `druid.segment_granularity` | Segment Granularity | `DAY` |
 | `druid.query_granularity` | Query granularity | `DAY` |

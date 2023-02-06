@@ -211,7 +211,7 @@ public class SegmentSpec implements Serializable {
                 } else if (field.getFieldType() == FieldType.DOUBLE) {
                     builder.add(new DoubleDimensionSchema(fieldName));
                 } else if (field.getFieldType() == FieldType.TIMESTAMP) {
-                    // TODO is this branch ever possible? Tthere's a precondition against FieldType.TIMESTAMP and
+                    // TODO is this branch ever possible? There's a precondition against FieldType.TIMESTAMP and
                     //  DruidDatasetExtensions converts TimestampType & DateType to StringType.
                     builder.add(new LongDimensionSchema(fieldName));
                 }

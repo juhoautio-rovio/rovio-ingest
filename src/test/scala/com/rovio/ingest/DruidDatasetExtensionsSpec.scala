@@ -35,7 +35,7 @@ class DruidDatasetExtensionsSpec extends FlatSpec with Matchers with BeforeAndAf
 
   before {
     DruidSourceBaseTest.MYSQL.start()
-    DruidSourceBaseTest.prepareDatabase()
+    DruidSourceBaseTest.prepareDatabase(DruidSourceBaseTest.MYSQL)
   }
 
   after {
@@ -244,7 +244,7 @@ class DruidDatasetExtensionsSpec extends FlatSpec with Matchers with BeforeAndAf
 
   it should "save the dataset to druid" in {
 
-    DruidSourceBaseTest.setUpDb()
+    DruidSourceBaseTest.setUpDb(DruidSourceBaseTest.MYSQL)
 
     // create Data source options
     val options = Map[String, String](

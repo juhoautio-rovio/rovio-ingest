@@ -112,7 +112,7 @@ public class WriterContext implements Serializable {
         this.version = version;
     }
 
-    static WriterContext from(CaseInsensitiveStringMap options, String version) {
+    public static WriterContext from(CaseInsensitiveStringMap options, String version) {
         return new WriterContext(options, version);
     }
 
